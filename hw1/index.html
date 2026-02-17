@@ -57,42 +57,32 @@
 		Then, if there aren't pixels outside the rectangle, continue. At the center of each pixel, sample the point. Then, evaluate the function at the sample point.
 		This is to tell us which side of the edge the pixel's center is on. According to the half-plane test, point is considered inside the triangle if the point is on the inside side of all 3 edges.
 		If the pixel the function returns true, then the pixel is indeed inside the triangle and thus we fill in the pixel as a result.
-		<br>
+		<p>
 		My triangle rasterization algorithm is no worse than the standard bounding-box method because it evaluates each sample within the triangle’s bounding box exactly once and pixels outside the box are not examined. 
 		By only evaluating the pixels inside the bounding box of the triangle, I am reducing the computation time needed to look at every single pixels in the image and only focusing on those that could largely matter instead.
-		<br>
+		</p>
+		<p>
 		Beyond simple bounding box traingle rasterization, I added a tracker to avoid computing the edge equation for each pixel everytime but rather by updating when it is inside the trinagle instead. With optimization, the performance gave 0.436ms whereas without optimization gave 0.454ms.
-		<br>
+		</p>
 
 		<h2>Timing Comparison</h2>
 
 		<table>
 		<tr>
 			<th>Version</th>
-			<th>Optimization</th>
 			<th>Time (ms)</th>
 		</tr>
 
 		<tr>
 			<td>Baseline</td>
-			<td>None</td>
-			<td>42.1</td>
+			<td>0.454ms</td>
 		</tr>
 
 		<tr>
 			<td>Optimized</td>
-			<td>Screen-clipped bounding box</td>
-			<td>29.4</td>
-		</tr>
-
-		<tr>
-			<td>Optimized + Incremental edges</td>
-			<td>Multiple optimizations</td>
-			<td>18.7</td>
+			<td>0.436ms</td>
 		</tr>
 		</table>
-
-
 
 		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
 		<div style="display: flex; flex-direction: column; align-items: center;">
