@@ -167,7 +167,7 @@
 				  <figcaption> Color Wheel Composed using Barycentric Coordinates </figcaption>
 				</td>
 				<td style="text-align: center;">
-					<img src="exampletri.png" width="200px"/>
+					<img src="exampletri.png" width="300px"/>
 					<figcaption> Example Image for Further Explanation  </figcaption>
 				  </td>
 			  </tr>
@@ -176,7 +176,41 @@
 
 
 		<h2>Task 5: "Pixel sampling" for texture mapping</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Pixel sampling determines the color of a pixel by looking up the texture at its (u, v) coordinates. 
+		For each pixel in a triangle, I interpolated the texture coordinates using barycentric coordinates and then sampled the texture.
+		Nearest sampling picks the color of the closest texel but can look blocky.
+		In contrast, bilinear sampling averages the four surrounding texels and provides smoother results.
+
+		The difference between nearest and bilinear sampling is that nearest sampling is much more simpler by only looking at the texture of the coordinates close to it whereas bilinear sampling takes the 4 surrounding coordinates.
+		There will be a large between the two methods when within four texels, there are four or more varying colors. 
+		This will provide large differences because since bilinear sampling takes four surrounding coordinates, it will provide a more accurate and colorful palette compared to nearest sampling that will only show a more soloed color for only taking one coordinate into account.
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			<tr>
+				<td style="text-align: center;">
+					<img src="nearest1samp.png" width="400px"/>
+					<figcaption> Nearest Sampling at 1 Samples per Pixel </figcaption>
+				</td>
+		
+				<td style="text-align: center;">
+					<img src="bilinsamp1.png" width="400px"/>
+					<figcaption> Bilinear Sampling at 1 Samples per Pixel </figcaption>
+				</td>
+		
+				<td style="text-align: center;">
+					<img src="nearestsamp16.png" width="400px"/>
+					<figcaption> Nearest Sampling at 16 Samples per Pixel </figcaption>
+				</td>
+
+				<td style="text-align: center;">
+					<img src="bilinsamp16.png" width="400px"/>
+					<figcaption> Bilinear Sampling at 16 Samples per Pixel </figcaption>
+				</td>
+			</tr>
+			</table>
+		</div>
+
 
 		<h2>Task 6: "Level Sampling" with mipmaps for texture mapping</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
