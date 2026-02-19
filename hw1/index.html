@@ -32,23 +32,20 @@
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-irisli1/hw1/index.html">cal-cs184-student.github.io/hw-webpages-irisli1/hw1/index.html</a>
 		
 		<br>
 
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
-
-		<figure>
-			<img src="lion.jpg" alt="Lion" style="width:50%"/>
-			<figcaption>You can add images with captions!</figcaption>
-		</figure>
+		Link to GitHub repository: <a href="https://github.com/cal-cs184-student/hw1-rasterizer-corgis">github.com/cal-cs184-student/hw1-rasterizer-corgis</a>
 
 		<!--
 		We've already added one heading per task, to make your write-up as navigable when grading. Please fit your write-up within these sections!
 		-->
 
 		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+		I built a triangle rasterizer with texture mapping, supporting supersampling, mipmaps, and trilinear filtering. 
+		I implemented nearest and bilinear pixel sampling and multiple mipmap level strategies (L_ZERO, L_NEAREST, L_LINEAR). 
+		This taught me how sampling choices affect image quality and gave me hands-on experience connecting texture filtering theory to actual rendered images.		
 
 		<h2>Task 1: Drawing Single-Color Triangles</h2>
 		To rasterize triangles, one must sample to see if each pixel center is inside the triangle. To do so, one must find a rectangle that can encompass the triangle in the least amount of area as possible.
@@ -62,7 +59,7 @@
 		By only evaluating the pixels inside the bounding box of the triangle, I am reducing the computation time needed to look at every single pixels in the image and only focusing on those that could largely matter instead.
 		</p>
 		<p>
-		Beyond simple bounding box traingle rasterization, I added a tracker to avoid computing the edge equation for each pixel everytime but rather by updating when it is inside the trinagle instead. With optimization, the performance gave 0.436ms whereas without optimization gave 0.454ms.
+		 <strong> EXTRA CREDIT: </strong> simple bounding box traingle rasterization, I added a tracker to avoid computing the edge equation for each pixel everytime but rather by updating when it is inside the trinagle instead. With optimization, the performance gave 0.436ms whereas without optimization gave 0.454ms.
 		</p>
 
 		<h2>Timing Comparison</h2>
@@ -186,7 +183,7 @@
 		This will provide large differences because since bilinear sampling takes four surrounding coordinates, it will provide a more accurate and colorful palette compared to nearest sampling that will only show a more soloed color for only taking one coordinate into account.
 
 		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			<table style="width: 90%; text-align: center; border-collapse: collapse;">
 			<tr>
 				<td style="text-align: center;">
 					<img src="nearest1samp.png" width="400px"/>
@@ -221,7 +218,7 @@
 		</p>
 
 		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			<table style="width: 90%; text-align: center; border-collapse: collapse;">
 			<tr>
 				<td style="text-align: center;">
 					<img src="L0PN.png" width="400px"/>
@@ -245,20 +242,6 @@
 			</tr>
 			</table>
 		</div>
-
-		<h2>(Optional) Task 7: Extra Credit - Draw Something Creative!</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
 		</div>
 	</body>
 </html>
