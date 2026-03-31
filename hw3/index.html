@@ -97,7 +97,7 @@ Show images with normal shading for a few small .dae files. -->
   Walk through the ray generation and primitive intersection parts of the rendering pipeline.
 </h3>
 <p>
-    TASK 1: To generate the rays, we had to take normalized image coordinates and output a ray in the world space. To do this, we followed 3 main steps.
+    <u>TASK 1: To generate the rays, we had to take normalized image coordinates and output a ray in the world space. To do this, we followed 3 main steps. </u>
     <ul>
       <ol>Transform image coordinates to camera space</ol>
       <ol>Generate the ray in camera space</ol>
@@ -118,7 +118,7 @@ Show images with normal shading for a few small .dae files. -->
     Finally, we had to transform this into a ray in the world space. We tranformed the direction vector via c2w, the camera to world rotation matrix. Then, we normalized the transformed direction. We created a ray with origin pos, direction our new direction vector. Finally, we set this ray's min_t to nClip and max_t to fClip, and returned the ray.
 </p>
 <p>
-  TASK 2: To implement raytrace_pixel, we sampled camera rays and traced them through the scene, returning the average of them. We followed these steps:
+  <u>TASK 2: To implement raytrace_pixel, we sampled camera rays and traced them through the scene, returning the average of them. We followed these steps: </u>
   <ul>
     <li>
       Take ns_aa samples (via a loop). Keep a variable for total radiance. Within the loop:
