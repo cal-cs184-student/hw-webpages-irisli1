@@ -39,12 +39,12 @@
 
 <body>
 
-<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2023</h1>
+<h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2026</h1>
 <h1 align="middle">Project 3-1: Path Tracer</h1>
 <h2 align="middle"> Nada Hameed & Iris Li </h2>
 
 <!-- Add Website URL -->
-<h2 align="middle">Website URL: <a href="TODO">TODO</a></h2>
+<h2 align="middle">Website URL: <a href="https://cal-cs184-student.github.io/hw-webpages-irisli1/hw3/index.html">HW3</a></h2>
 
 <br><br>
 
@@ -189,7 +189,7 @@ Compare rendering times on a few scenes with moderately complex geometries with 
   Walk through your BVH construction algorithm. Explain the heuristic you chose for picking the splitting point.
 </h3>
 <p>
-    PART 1: We had to construct a BVH from the given vector of primitives and max leaf size configuration. We followed these steps:
+    <u>PART 1: We had to construct a BVH from the given vector of primitives and max leaf size configuration. We followed these steps: </u>
     <ul>
       <li>Compute the bounding box of the primitives.</li>
       <li>Initialize a new BVH node with that bounding box.</li>
@@ -207,8 +207,8 @@ Compare rendering times on a few scenes with moderately complex geometries with 
 </p>
 
 <p>
-  PART 2: We had to check if a ray intersected a bounding box and at what points (of entry and exit). We used the equations from lecture for this, the ray and axis-aligned plane intersection formula and the ray and axis-aligned box intersection method.
-  PART 3: We checked if a ray intersects any primitives in the BVH. We followed this basic algorithm:
+  <u>PART 2: We had to check if a ray intersected a bounding box and at what points (of entry and exit). We used the equations from lecture for this, the ray and axis-aligned plane intersection formula and the ray and axis-aligned box intersection method.</u> <br>
+  <u>PART 3: We checked if a ray intersects any primitives in the BVH. We followed this basic algorithm: </u>
   <ul>
     <li>Reverse traversal algorithm:</li>
     <ul>
