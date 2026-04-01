@@ -248,7 +248,12 @@ DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xht
       Compare rendering times on a few scenes with moderately complex geometries with and without BVH acceleration. Present your results in a one-paragraph analysis.
     </h3>
     <p>
-      YOUR RESPONSE GOES HERE
+      Comparing the maxplanck.dae scene with the CBlucy.dae scene, the rendering times for these moderately complex geometries (the first with tens of thousands of triangles and the second with hundreds of thousands of triangles),
+      we can see that the rendering times differ greatly with and without BVH acceleration. For the maxplanck.dae scene, the rendering time with BVH acceleration was 0.0373s. Without BVH accleration, the rendering time was 11.1565s.
+      For the CBlucy.dae scene, the rendering time with BVH acceleration was 0.0225s. Without BVH acceleration, the rendering time was 60.9923s.
+      For the cow.dae scene, the rendering time with BVH acceleration was 0.0302s. Without BVH acceleration, the rendering time was 1.3293s.
+      For the blob.dae scene, the rendering time with BVH acceleration was 0.0468s. Without BVH acceleration, the rendering time was 104.7974s.
+      From these results, we can observe that rendering with BVH acceleration decreases rendering time by at least a multiple of 2. Rendering without BVH acceleration siginificantly lengthens the rendering time, especially with scenes that are composed of moderately complex geometries such as maxplanck.dae and CBlucy.dae.
     </p>
     <br>
 
