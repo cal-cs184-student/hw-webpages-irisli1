@@ -84,9 +84,9 @@
 
     <h2 align="middle">Overview</h2>
     <p>
-      In this homework, we implemented ray generation, worked with bounding volume hierarchy (BVH), direct and global illumination, and adaptive sampling.
-      For part 1, we implemented ray generation by finding the camera coordinates using the formulas and creating rays with origin and direction. After normalizing the direction, we transformed it into a ray in the world space. By transforming direction vector and normalizing the transformed direction, we now have a ray with our new direction vector. By setting the ray's min_t to nClip and max_t to fClip, we now have the ray returned. For implementing ray-triangle intersection, we used the Moller Trumbore formula from lecture. By using the edges of the triangle and the cross products, we were able to check if the ray would hit within the bounds of the triangle.
-      For part 2, we implemented the BVH construction algorithm.
+      In this homework, we implemented ray generation, BVH acceleration, direct and global illumination, and adaptive sampling. For Part 1, we generated camera rays by computing camera-space coordinates from the given formulas, constructing rays with an origin and direction, and transforming them into world space. We normalized the direction for better computation. For ray-triangle intersection, we implemented the Moller–Trumbore algorithm using vectors and cross products to check whether a ray hits within the triangle bounds. In Part 2, we built a BVH by using recursion, which greatly reduced the number of intersection tests and improved rendering performance. In Part 3, we implemented direct illumination using Monte Carlo sampling, including both uniform hemisphere sampling and importance sampling from lights, along with shadow rays to check visibility and produce more realistic lighting and shadows. In Part 4, we added global illumination by recursively bouncing rays and using Russian roulette to end paths, which allowed us to capture indirect lighting effects like color bleeding. Finally, in Part 5, we implemented adaptive sampling by tracking the mean and variance per pixel and stopping early once convergence was detected, which made rendering more efficient without sacrificing much quality.
+
+      Overall, it was really interesting to see how each part builds on the previous one, especially how switching from hemisphere sampling to importance sampling noticeably reduced noise and improved the final images. One cool thing we noticed was how dramatically the noise patterns change just from changing the sampling strategy, even though both are technically “correct,” importance sampling makes the image converge way faster and look much cleaner. We also learned how much of a difference acceleration structures like BVH make in practice, since without it the same scenes become extremely slow to render.
     </p>
     <br>
 
@@ -270,37 +270,37 @@
     </h3>
     <p>
       We had two different implementations of the direct lighting function.
-      <ul>
-        <ol>
-          Direct lighting with Uniform Hemisphere Sampling
-          <ul>
-            <li>In this method, we estimated the direct lighting on a point by sampling uniformly in a hemisphere.</li>
-            <li>We followed the pseudocode from lecture, and followed the Monte Carlo estimator.</li>
-            <li>We sampled scene->lights.size() * ns_area_light times. In one sample:</li>
-            <li>Our sampler returned a vector wi, which we transformed to world space.</li>
-            <li>Then we created a new ray from our sample in world space and hit_p, where we hit, and we also set the ray's minimum to be a given epsilon.</li>
-            <li>Then we created a new intersection, and checked if it intersects the light source.</li>
-            <li>If yes, we used the reflectance eqaution from lecture to compute the current term in the summation, and added it to the total sum.</li>
-            <li>If not we continue the loop (sampling).</li>
-            <li>Then we multiplied our ultimate sum by 1/num_samples, again, following the reflection equation from lecture, and returned that value.</li>
-          </ul>
-        </ol>
-        <ol>Direct lighting by Importance Sampling Lights</ol>
+    <ul>
+      <ol>
+        Direct lighting with Uniform Hemisphere Sampling
         <ul>
-          <li>We followed these steps, where we sample all the lights directly instead of as uniform directions in the hemisphere.</li>
-          <li>We loop over all the lights in scene->lights.</li>
-          <li>If the light is a point light we only need one sample.</li>
-          <li>Otherwise, sample ns_area_light times.</li>
-          <li>For each sample: </li>
-          <ul>
-            <li>Call light->sample_L to get the incoming radiance Li, world-space direction wi, distance to light, and probability (pdf).</li>
-            <li>Convert world space wi to object space wi_local.</li>
-            <li>Check if the light is behind the surface</li>
-            <li>Cast a new ray from hit_p toward the light, and set min_t to be epsilon, max_t to be the distance to light - epsilon.</li>
-            <li>If there is no intersection between hit_p and the light, we apply the reflectance equation from lecture.</li>
-          </ul>
+          <li>In this method, we estimated the direct lighting on a point by sampling uniformly in a hemisphere.</li>
+          <li>We followed the pseudocode from lecture, and followed the Monte Carlo estimator.</li>
+          <li>We sampled scene->lights.size() * ns_area_light times. In one sample:</li>
+          <li>Our sampler returned a vector wi, which we transformed to world space.</li>
+          <li>Then we created a new ray from our sample in world space and hit_p, where we hit, and we also set the ray's minimum to be a given epsilon.</li>
+          <li>Then we created a new intersection, and checked if it intersects the light source.</li>
+          <li>If yes, we used the reflectance eqaution from lecture to compute the current term in the summation, and added it to the total sum.</li>
+          <li>If not we continue the loop (sampling).</li>
+          <li>Then we multiplied our ultimate sum by 1/num_samples, again, following the reflection equation from lecture, and returned that value.</li>
+        </ul>
+      </ol>
+      <ol>Direct lighting by Importance Sampling Lights</ol>
+      <ul>
+        <li>We followed these steps, where we sample all the lights directly instead of as uniform directions in the hemisphere.</li>
+        <li>We loop over all the lights in scene->lights.</li>
+        <li>If the light is a point light we only need one sample.</li>
+        <li>Otherwise, sample ns_area_light times.</li>
+        <li>For each sample: </li>
+        <ul>
+          <li>Call light->sample_L to get the incoming radiance Li, world-space direction wi, distance to light, and probability (pdf).</li>
+          <li>Convert world space wi to object space wi_local.</li>
+          <li>Check if the light is behind the surface</li>
+          <li>Cast a new ray from hit_p toward the light, and set min_t to be epsilon, max_t to be the distance to light - epsilon.</li>
+          <li>If there is no intersection between hit_p and the light, we apply the reflectance equation from lecture.</li>
         </ul>
       </ul>
+    </ul>
     </p>
 
     <h3>
@@ -454,47 +454,133 @@
     </div>
     <br>
     <p>
-      YOUR EXPLANATION GOES HERE
+      Here, direct illumination is more brighter whereas indirect illumination has softer color bleeding in the ceiling.
     </p>
     <br>
 
     <h3>
-      For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel.
+      N Bounce Rays: For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel. isAccumBounces = false
     </h3>
     <!-- Example of including multiple figures -->
     <div align="middle">
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
+            <img src="images/part4_images_new/Nlights_m0_accF_bunny.png" align="middle" width="400px"/>
             <figcaption>max_ray_depth = 0 (CBbunny.dae)</figcaption>
           </td>
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
+            <img src="images/part4_images_new/Nlights_m1_accF_bunny.png" align="middle" width="400px"/>
             <figcaption>max_ray_depth = 1 (CBbunny.dae)</figcaption>
           </td>
         </tr>
         <tr align="center">
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
+            <img src="images/part4_images_new/Nlights_m2_accF_bunny.png" align="middle" width="400px"/>
             <figcaption>max_ray_depth = 2 (CBbunny.dae)</figcaption>
           </td>
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
+            <img src="images/part4_images_new/Nlights_m3_accF_bunny.png" align="middle" width="400px"/>
             <figcaption>max_ray_depth = 3 (CBbunny.dae)</figcaption>
           </td>
         </tr>
         <tr align="center">
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
-            <figcaption>max_ray_depth = 100 (CBbunny.dae)</figcaption>
+            <img src="images/part4_images_new/Nlights_m4_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 4 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/Nlights_m5_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 5 (CBbunny.dae)</figcaption>
           </td>
         </tr>
       </table>
     </div>
     <br>
+
+    <h3>
+      N Bounce Rays: For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel. isAccumBounces = true
+    </h3>
+    <!-- Example of including multiple figures -->
+    <div align="middle">
+      <table style="width:100%">
+        <tr align="center">
+          <td>
+            <img src="images/part4_images_new/Nlights_m0_accT_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 0 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/Nlights_m1_accT_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 1 (CBbunny.dae)</figcaption>
+          </td>
+        </tr>
+        <tr align="center">
+          <td>
+            <img src="images/part4_images_new/Nlights_m2_accT_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 2 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/Nlights_m3_accT_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 3 (CBbunny.dae)</figcaption>
+          </td>
+        </tr>
+        <tr align="center">
+          <td>
+            <img src="images/part4_images_new/Nlights_m4_accT_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 4 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/Nlights_m5_accT_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 5 (CBbunny.dae)</figcaption>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+
+    <h3>
+      Russian Roulette: For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel. isAccumBounces = false
+    </h3>
+    <!-- Example of including multiple figures -->
+    <div align="middle">
+      <table style="width:100%">
+        <tr align="center">
+          <td>
+            <img src="images/part4_images_new/RR_m0_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 0 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/RR_m1_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 1 (CBbunny.dae)</figcaption>
+          </td>
+        </tr>
+        <tr align="center">
+          <td>
+            <img src="images/part4_images_new/RR_m2_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 2 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/RR_m3_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 3 (CBbunny.dae)</figcaption>
+          </td>
+        </tr>
+        <tr align="center">
+          <td>
+            <img src="images/part4_images_new/RR_m4_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 4 (CBbunny.dae)</figcaption>
+          </td>
+          <td>
+            <img src="images/part4_images_new/RR_m5_accF_bunny.png" align="middle" width="400px"/>
+            <figcaption>max_ray_depth = 5 (CBbunny.dae)</figcaption>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+
+
     <p>
-      YOUR EXPLANATION GOES HERE
+      Here, we see that as max_ray_depth increase, the image gets darker. There is more indirect lighting and softer shadows. The rendering time also increases due to the amount of additional bounces needed.
     </p>
     <br>
 
@@ -557,7 +643,10 @@
       Explain adaptive sampling. Walk through your implementation of the adaptive sampling.
     </h3>
     <p>
-      YOUR RESPONSE GOES HERE
+      Adaptive sampling is when we try to stop continuing rays on pixels that are already considered steady and continue sampling rays that are noisy instead to improve the quality of the image and reduce noise.
+      My implementation was to take several camera rays per pixel and stopping once the pixel color gets steady. For every sample, radiance is calculated and brightness is tracked to estimate mean and variance. Every other sample, we check the noise to make sure it's small enough compared to mean.
+      If it is, stop sampling, if not, continue sampling. Lastly, samples are averaged.
+
     </p>
     <br>
 
@@ -569,22 +658,22 @@
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
-            <figcaption>Rendered image (example1.dae)</figcaption>
+            <img src="images/part5_images/bunny.png" align="middle" width="400px"/>
+            <figcaption>Rendered image (bunny.dae)</figcaption>
           </td>
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
-            <figcaption>Sample rate image (example1.dae)</figcaption>
+            <img src="images/part5_images/bunny_rate.png" align="middle" width="400px"/>
+            <figcaption>Sample rate image (bunny.dae)</figcaption>
           </td>
         </tr>
         <tr align="center">
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
-            <figcaption>Rendered image (example2.dae)</figcaption>
+            <img src="images/part5_images/sphere.png" align="middle" width="400px"/>
+            <figcaption>Rendered image (CBspheres.dae)</figcaption>
           </td>
           <td>
-            <img src="images/your_file.png" align="middle" width="400px"/>
-            <figcaption>Sample rate image (example2.dae)</figcaption>
+            <img src="images/part5_images/sphererate.png" align="middle" width="400px"/>
+            <figcaption>Sample rate image (CBspheres.dae)</figcaption>
           </td>
         </tr>
       </table>
