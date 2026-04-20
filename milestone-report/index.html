@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,8 +37,7 @@
       }
     };
   </script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
   <!-- Body font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -50,65 +50,83 @@
     @font-face {
       font-family: 'IowanOldStyle';
       src: url('../public/fonts/iowanoldst-bt/bitstream-iowan-old-style-bt-586c36a8d7712.ttf') format('truetype');
-      font-weight: 400; font-style: normal;
+      font-weight: 400;
+      font-style: normal;
     }
+
     @font-face {
       font-family: 'IowanOldStyle';
       src: url('../public/fonts/iowanoldst-bt/bitstream-iowan-old-style-italic-bt-586c3740dc396.ttf') format('truetype');
-      font-weight: 400; font-style: italic;
+      font-weight: 400;
+      font-style: italic;
     }
+
     @font-face {
       font-family: 'IowanOldStyle';
       src: url('../public/fonts/iowanoldst-bt/bitstream-iowan-old-style-bold-bt-586c371d8d669.ttf') format('truetype');
-      font-weight: 700; font-style: normal;
+      font-weight: 700;
+      font-style: normal;
     }
+
     @font-face {
       font-family: 'IowanOldStyle';
       src: url('../public/fonts/iowanoldst-bt/bitstream-iowan-old-style-bold-italic-bt-586c37701cb62.ttf') format('truetype');
-      font-weight: 700; font-style: italic;
+      font-weight: 700;
+      font-style: italic;
     }
+
     @font-face {
       font-family: 'IowanOldStyle';
       src: url('../public/fonts/iowanoldst-bt/bitstream-iowan-old-style-black-bt-586c36e930225.ttf') format('truetype');
-      font-weight: 900; font-style: normal;
+      font-weight: 900;
+      font-style: normal;
     }
 
     /* ── Design tokens ───────────────────────────────────────── */
     :root {
-      --bg:          #fdfcf8;
-      --bg-alt:      #f5f3ee;
-      --bg-code:     #1e1e2e;
-      --border:      #e2ddd4;
-      --text:        #1a1a1e;
-      --text-muted:  #777;
-      --accent:      #2d5be3;
-      --accent-dim:  rgba(45, 91, 227, 0.10);
-      --green:       #1d7a4e;
-      --serif:       'IowanOldStyle', Georgia, 'Times New Roman', serif;
-      --sans:        'Inter', system-ui, -apple-system, sans-serif;
-      --mono:        'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-      --width:       800px;
-      --r:           6px;
-      --nav-bg:      rgba(253, 252, 248, 0.88);
+      --bg: #fdfcf8;
+      --bg-alt: #f5f3ee;
+      --bg-code: #1e1e2e;
+      --border: #e2ddd4;
+      --text: #1a1a1e;
+      --text-muted: #777;
+      --accent: #2d5be3;
+      --accent-dim: rgba(45, 91, 227, 0.10);
+      --green: #1d7a4e;
+      --serif: 'IowanOldStyle', Georgia, 'Times New Roman', serif;
+      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      --width: 800px;
+      --r: 6px;
+      --nav-bg: rgba(253, 252, 248, 0.88);
     }
 
     /* ── Dark mode tokens ────────────────────────────────────── */
     [data-theme="dark"] {
-      --bg:          #141414;
-      --bg-alt:      #1e1e1e;
-      --bg-code:     #0d0d0d;
-      --border:      #2e2e2e;
-      --text:        #e8e6e0;
-      --text-muted:  #888;
-      --accent:      #6b93f5;
-      --accent-dim:  rgba(107, 147, 245, 0.12);
-      --green:       #4ade80;
-      --nav-bg:      rgba(20, 20, 20, 0.88);
+      --bg: #141414;
+      --bg-alt: #1e1e1e;
+      --bg-code: #0d0d0d;
+      --border: #2e2e2e;
+      --text: #e8e6e0;
+      --text-muted: #888;
+      --accent: #6b93f5;
+      --accent-dim: rgba(107, 147, 245, 0.12);
+      --green: #4ade80;
+      --nav-bg: rgba(20, 20, 20, 0.88);
     }
 
     /* ── Reset ───────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
@@ -121,13 +139,16 @@
 
     /* ── Sticky nav ──────────────────────────────────────────── */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       background: var(--nav-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       transition: background .25s, border-color .25s;
     }
+
     .nav-inner {
       max-width: var(--width);
       margin: 0 auto;
@@ -139,6 +160,7 @@
       gap: 2px;
       overflow-x: auto;
     }
+
     .nav-inner a {
       font-size: 0.72rem;
       font-weight: 500;
@@ -148,12 +170,17 @@
       text-decoration: none;
       padding: 0 12px;
       height: 50px;
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
       border-bottom: 2px solid transparent;
       transition: color .15s, border-color .15s;
       white-space: nowrap;
     }
-    .nav-inner a:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+    .nav-inner a:hover {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
 
     /* ── Hero ────────────────────────────────────────────────── */
     .hero {
@@ -161,12 +188,18 @@
       border-bottom: 1px solid var(--border);
       text-align: center;
     }
-    .hero-inner { max-width: var(--width); margin: 0 auto; }
+
+    .hero-inner {
+      max-width: var(--width);
+      margin: 0 auto;
+    }
 
     .pill {
       display: inline-block;
-      font-size: 0.71rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.71rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--accent);
       background: var(--accent-dim);
       padding: 5px 14px;
@@ -187,22 +220,36 @@
     .hero-meta {
       font-size: 0.88rem;
       color: var(--text-muted);
-      display: flex; flex-direction: column;
-      gap: 5px; align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
     }
-    .hero-meta a { color: var(--accent); text-decoration: none; }
-    .hero-meta a:hover { text-decoration: underline; }
+
+    .hero-meta a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .hero-meta a:hover {
+      text-decoration: underline;
+    }
 
     .hero-divider {
-      width: 40px; height: 2px;
+      width: 40px;
+      height: 2px;
       background: var(--border);
       margin: 28px auto;
       border-radius: 2px;
     }
 
-    .hero-img { margin-top: 36px; }
+    .hero-img {
+      margin-top: 36px;
+    }
+
     .hero-img img {
-      max-width: 500px; width: 100%;
+      max-width: 500px;
+      width: 100%;
     }
 
     /* ── Hero links ──────────────────────────────────────────── */
@@ -227,6 +274,7 @@
       transition: color .15s;
       position: relative;
     }
+
     .hero-links a:not(:last-child)::after {
       content: '';
       position: absolute;
@@ -236,11 +284,15 @@
       width: 1px;
       background: var(--border);
     }
+
     .hero-links a:hover {
       color: var(--text);
       text-decoration: none;
     }
-    .hero-links a i { font-size: 0.95em; }
+
+    .hero-links a i {
+      font-size: 0.95em;
+    }
 
     /* ── Main ────────────────────────────────────────────────── */
     main {
@@ -250,51 +302,95 @@
     }
 
     /* ── Sections ────────────────────────────────────────────── */
-    .section { margin-bottom: 80px; scroll-margin-top: 68px; }
+    .section {
+      margin-bottom: 80px;
+      scroll-margin-top: 68px;
+    }
 
     .section-label {
-      display: flex; align-items: baseline; gap: 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
       margin-bottom: 24px;
       padding-bottom: 14px;
       border-bottom: 1.5px solid var(--border);
     }
+
     .section-tag {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--text-muted);
       flex-shrink: 0;
       padding-top: 5px;
     }
 
     /* ── Headings ────────────────────────────────────────────── */
-    h1, h2, h3, h4 { font-family: var(--serif); color: var(--text); }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--serif);
+      color: var(--text);
+    }
 
     h2 {
-      font-size: 1.9rem; font-weight: 400;
-      letter-spacing: -0.01em; line-height: 1.2;
+      font-size: 1.9rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
       scroll-margin-top: 68px;
     }
+
     h3 {
-      font-size: 1.15rem; font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 700;
       margin: 36px 0 12px;
       letter-spacing: -0.005em;
     }
+
     h4 {
-      font-size: 0.95rem; font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: 700;
       margin: 24px 0 8px;
       font-style: italic;
     }
 
     /* ── Body text ───────────────────────────────────────────── */
-    p { margin-bottom: 1em; }
-    ul, ol { padding-left: 1.5em; margin-bottom: 1em; }
-    li { margin-bottom: 0.3em; }
-    strong { font-weight: 600; }
-    em { font-style: italic; }
+    p {
+      margin-bottom: 1em;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    li {
+      margin-bottom: 0.3em;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    em {
+      font-style: italic;
+    }
 
     /* ── Links ───────────────────────────────────────────────── */
-    a { color: var(--accent); text-decoration: none; transition: color .15s; }
-    a:hover { color: #1a3fa0; text-decoration: underline; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color .15s;
+    }
+
+    a:hover {
+      color: #1a3fa0;
+      text-decoration: underline;
+    }
 
     /* ── Code ────────────────────────────────────────────────── */
     code {
@@ -305,6 +401,7 @@
       border-radius: 3px;
       padding: 1px 5px;
     }
+
     pre {
       background: var(--bg-code);
       color: #cdd6f4;
@@ -315,43 +412,71 @@
       font-size: 0.875rem;
       line-height: 1.65;
     }
-    pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
 
     /* ── Math display tweaks ─────────────────────────────────── */
     mjx-container[display="true"] {
       margin: 1.4em 0 !important;
       overflow-x: auto;
     }
+
     mjx-container {
       font-size: 1.05em !important;
     }
 
     /* ── Tables ──────────────────────────────────────────────── */
-    .table-wrap { overflow-x: auto; margin: 20px 0 28px; }
-    table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0 28px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
     th {
       background: var(--bg-alt);
-      font-weight: 600; font-size: 0.78rem;
-      letter-spacing: 0.05em; text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       padding: 10px 20px;
       border: 1px solid var(--border);
       text-align: center;
     }
+
     td {
       padding: 9px 20px;
       border: 1px solid var(--border);
       text-align: center;
     }
-    tr:nth-child(even) td { background: var(--bg-alt); }
+
+    tr:nth-child(even) td {
+      background: var(--bg-alt);
+    }
 
     /* ── Figures ─────────────────────────────────────────────── */
-    figure { text-align: center; margin: 28px 0 32px; }
+    figure {
+      text-align: center;
+      margin: 28px 0 32px;
+    }
+
     figure img {
       max-width: 100%;
       border-radius: var(--r);
-      box-shadow: 0 4px 24px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.05);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .09), 0 1px 4px rgba(0, 0, 0, .05);
       display: inline-block;
     }
+
     figcaption {
       margin-top: 10px;
       font-size: 0.85rem;
@@ -387,7 +512,9 @@
       cursor: pointer;
       color: var(--text-muted);
       font-size: 0.82rem;
-      display: flex; align-items: center; gap: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
       padding: 4px 11px;
       height: 30px;
       transition: border-color .15s, color .15s, background .15s;
@@ -395,6 +522,7 @@
       font-weight: 500;
       letter-spacing: 0.01em;
     }
+
     #theme-toggle:hover {
       border-color: var(--accent);
       color: var(--accent);
@@ -402,7 +530,17 @@
     }
 
     /* smooth theme transitions */
-    body, nav, main, header, footer, table, th, td, pre, code, .card {
+    body,
+    nav,
+    main,
+    header,
+    footer,
+    table,
+    th,
+    td,
+    pre,
+    code,
+    .card {
       transition: background .25s, color .25s, border-color .25s, box-shadow .25s;
     }
 
@@ -414,192 +552,224 @@
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    footer a { color: var(--text-muted); }
-    footer a:hover { color: var(--accent); }
+
+    footer a {
+      color: var(--text-muted);
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
 
     /* ── Responsive ──────────────────────────────────────────── */
     @media (max-width: 640px) {
-      .hero { padding: 52px 1.4rem 44px; }
-      main  { padding: 44px 1.4rem 64px; }
-      h2    { font-size: 1.55rem; }
+      .hero {
+        padding: 52px 1.4rem 44px;
+      }
+
+      main {
+        padding: 44px 1.4rem 64px;
+      }
+
+      h2 {
+        font-size: 1.55rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ── Navigation ───────────────────────────────────────────── -->
-<nav>
-  <div class="nav-inner">
-    <a href="../index.html">Home</a>
-    <span style="width: 1px; height: 18px; background: var(--border); margin: 0 6px; flex-shrink: 0;"></span>
-    <a href="#overview">Overview</a>
-    <a href="#task1">Section 1</a>
-    <a href="#task2">Section 2</a>
-    <a href="#task3">Section 3</a>
-    <a href="#task4">Section 4</a>
-    <a href="#task5">Section 5</a>
-    <button id="theme-toggle" aria-label="Toggle dark mode">
-      <i class="fas fa-moon"></i><span>Dark</span>
-    </button>
-  </div>
-</nav>
-
-<!-- ── Hero ─────────────────────────────────────────────────── -->
-<header class="hero">
-  <div class="hero-inner">
-    <div class="pill">CS 184 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; Milestone Report</div>
-    <h1>Final Project: Volumetric Scattering Milestone Report</h1>
-    <div class="hero-divider"></div>
-    <div class="hero-meta">
-      <span>Idhant Gulati &nbsp;·&nbsp; <span id="email-copy" title="Click to copy" style="cursor: pointer; user-select: none;">idhant [at] berkeley [dot] edu</span></span>
-	  <span>Daniel Grover  &nbsp;·&nbsp; <span id="email-copy" title="Click to copy" style="cursor: pointer; user-select: none;">dannywgrover [at] berkeley [dot] edu</span></span>
-	  <span>Rayyan Saiyed &nbsp;·&nbsp; <span id="email-copy" title="Click to copy" style="cursor: pointer; user-select: none;">rayyan.saiyed09 [at] berkeley [dot] edu</span></span>
-	  <span>Iris Li &nbsp;·&nbsp; <span id="email-copy" title="Click to copy" style="cursor: pointer; user-select: none;">irisli1 [at] berkeley [dot] edu</span></span>
+  <!-- ── Navigation ───────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html">Home</a>
+      <span style="width: 1px; height: 18px; background: var(--border); margin: 0 6px; flex-shrink: 0;"></span>
+      <a href="#overview">Summary</a>
+      <a href="#accomplishments">Accomplishments</a>
+      <a href="#results">Preliminary Results</a>
+      <a href="#reflection">Progress vs. Plan</a>
+      <a href="#next">Next Steps</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i><span>Dark</span>
+      </button>
     </div>
+  </nav>
 
-    <div class="hero-links">
-      <a href="https://cal-cs184-student.github.io/hw-webpages-irisli1/milestone-report/index.html" target="_blank">
-        <i class="fas fa-globe"></i>https://cal-cs184-student.github.io/hw-webpages-irisli1/milestone-report/index.html
-      </a>
-      <a href="https://github.com/cal-cs184-student/hw3-pathtracer-gpus-go-brrr" target="_blank">
-        <i class="fab fa-github"></i>link to github repo
-      </a>
-	  <a href="https://github.com/cal-cs184-student/hw3-pathtracer-gpus-go-brrr" target="_blank">
-        <i class="fas fa-video"></i>link to milestone video
-      </a>
-	  <a href="https://github.com/cal-cs184-student/hw3-pathtracer-gpus-go-brrr" target="_blank">
-        <i class="fas fa-chalkboard"></i>link to presentation slides
-      </a>
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="pill">CS 184 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; Milestone Report</div>
+      <h1>Volumetric Scattering Milestone Report</h1>
+      <div class="hero-divider"></div>
+      <div class="hero-meta">
+        <span>Idhant Gulati &nbsp;·&nbsp; <span class="email-copy" data-email="idhant@berkeley.edu" title="Click to copy"
+            style="cursor: pointer; user-select: none;">idhant [at] berkeley [dot] edu</span></span>
+        <span>Daniel Grover &nbsp;·&nbsp; <span class="email-copy" data-email="dannywgrover@berkeley.edu" title="Click to copy"
+            style="cursor: pointer; user-select: none;">dannywgrover [at] berkeley [dot] edu</span></span>
+        <span>Rayyan Saiyed &nbsp;·&nbsp; <span class="email-copy" data-email="rayyan.saiyed09@berkeley.edu" title="Click to copy"
+            style="cursor: pointer; user-select: none;">rayyan.saiyed09 [at] berkeley [dot] edu</span></span>
+        <span>Iris Li &nbsp;·&nbsp; <span class="email-copy" data-email="irisli1@berkeley.edu" title="Click to copy"
+            style="cursor: pointer; user-select: none;">irisli1 [at] berkeley [dot] edu</span></span>
+      </div>
+
+      <div class="hero-links">
+        <a href="https://cal-cs184-student.github.io/hw-webpages-irisli1/milestone-report/index.html" target="_blank">
+          <i class="fas fa-globe"></i>Webpage
+        </a>
+        <a href="https://github.com/rayyansaiyed09/volumetric-scattering" target="_blank">
+          <i class="fab fa-github"></i>GitHub
+        </a>
+        <a href="https://drive.google.com/drive/folders/1xf8NonhH_CbZRrIR9Ki0JmNI1FnU-_cU?usp=sharing" target="_blank">
+          <i class="fas fa-video"></i>Video
+        </a>
+        <a href="https://docs.google.com/presentation/d/1h4bhWJMrm5ARm2kWdi-V1fWu6J--8zSVPEgARkS_SQU/edit?usp=sharing"
+          target="_blank">
+          <i class="fas fa-file-powerpoint"></i>Slides
+        </a>
+      </div>
+
     </div>
+  </header>
 
-    <div class="hero-img" style="transform: scale(1.25); display: inline-block;">
-      <img src="cornell.png" style="width: 500px; max-width: 98%; border-radius: 2px;">
+  <!-- ── Content ───────────────────────────────────────────────── -->
+  <main>
+
+    <!-- Overview -->
+    <section class="section" id="overview">
+      <div class="section-label">
+        <h2>Summary</h2>
+      </div>
+      <p>We extended the HW3 path tracer with single-scattering volumetrics. RGB spotlights inside a Cornell box
+        filled with uniform fog now produce visible cones of light; without fog, the same scene shows only colored
+        dots on the back wall.</p>
+    </section>
+
+    <!-- Accomplishments -->
+    <section class="section" id="accomplishments">
+      <div class="section-label">
+        <span class="section-tag">§ 1</span>
+        <h2>Accomplishments</h2>
+      </div>
+
+      <ul>
+        <li><strong>Spotlights:</strong> implemented <code>SpotLight::sample_L()</code> (was an empty stub) with
+          falloff angle and exponent so <code>.dae</code> spotlights actually light the scene.</li>
+        <li><strong><code>medium.h</code>:</strong> added a <code>Medium</code> struct holding
+          <code>sigma_a</code>, <code>sigma_s</code>, Henyey–Greenstein <code>g</code>, and emission, plus helpers
+          for extinction and albedo.</li>
+        <li><strong>Volume path:</strong> in <code>est_radiance_global_illumination</code> we sample a free-flight
+          distance \(t = -\ln(1-\xi)/\sigma_t\). If it falls before the nearest surface, we treat it as a fog
+          interaction: next-event estimation to each light with Beer–Lambert transmittance and an isotropic phase,
+          plus one uniform-sphere indirect bounce.</li>
+      </ul>
+    </section>
+
+    <!-- Preliminary Results -->
+    <section class="section" id="results">
+      <div class="section-label">
+        <span class="section-tag">§ 2</span>
+        <h2>Preliminary Results</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0;">
+        <figure style="margin: 0;">
+          <img src="nofog_test1.png" alt="Cornell box with three spotlights, no fog">
+          <figcaption>No fog — spotlights only show where they hit the wall.</figcaption>
+        </figure>
+        <figure style="margin: 0;">
+          <img src="fog_test8_samples_up.png" alt="Cornell box with uniform fog">
+          <figcaption>Uniform fog — visible RGB scattering cones.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="section" id="reflection">
+      <div class="section-label">
+        <span class="section-tag">§ 3</span>
+        <h2>Progress vs. Plan</h2>
+      </div>
+
+      <ul>
+        <li><strong>Week 1</strong> (medium struct + transmittance + integration): done.</li>
+        <li><strong>Week 2</strong> (non-uniform density): not started.</li>
+        <li><strong>Week 3</strong> (phase function + shadow rays): shadow rays and HG done; phase-function
+          importance sampling still TODO.</li>
+        <li><strong>Week 4</strong> (multi-bounce, RR, final renders): single-scatter recursion works; RR tuning
+          and final renders ahead.</li>
+      </ul>
+      <p>We are roughly on schedule. The main slippage came from having to implement spotlights from scratch and
+        from early fog renders that looked identical to no-fog until we raised both the light radiance and the
+        scattering coefficient.</p>
+    </section>
+
+    <!-- Next steps -->
+    <section class="section" id="next">
+      <div class="section-label">
+        <span class="section-tag">§ 4</span>
+        <h2>Next Steps</h2>
+      </div>
+
+      <ul>
+        <li>Move the hard-coded fog into the scene so density and color are per-render.</li>
+        <li>Add heterogeneous media via delta tracking for the foggy-streetlight scene.</li>
+        <li>Importance-sample the Henyey–Greenstein phase function to reduce noise.</li>
+        <li>Tune Russian roulette for volume paths and produce final renders.</li>
+        <li>Compare against Mitsuba 3 as a correctness check.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <a href="../index.html">← All Homeworks</a>
+    &nbsp;·&nbsp;
+    CS 184 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; UC Berkeley
+    <div style="margin-top: 10px; font-size: 0.74rem; color: #aaa;">
+      Page design adapted from <a href="https://nerfies.github.io" target="_blank" style="color: #aaa;">Nerfies</a>
+      (<a href="https://github.com/nerfies/nerfies.github.io" target="_blank" style="color: #aaa;">source</a>),
+      licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color: #aaa;">CC BY-SA
+        4.0</a>.
+      Additional aesthetic modifications applied.
     </div>
-  </div>
-</header>
+  </footer>
 
-<!-- ── Content ───────────────────────────────────────────────── -->
-<main>
+  <script>
+    document.querySelectorAll('.email-copy').forEach(el => {
+      el.addEventListener('click', function () {
+        navigator.clipboard.writeText(this.dataset.email);
+        const orig = this.textContent;
+        this.textContent = 'copied!';
+        setTimeout(() => this.textContent = orig, 1800);
+      });
+    });
+  </script>
 
-  <!-- Overview -->
-  <section class="section" id="overview">
-    <div class="section-label">
-      <h2>Summary</h2>
-    </div>
-    <p><strong>Summary</strong> For our final project, we implemented volumetric scattering to portray a laser shining in a Cornell box with uniformly distributed fog. We showed the difference in the image with and without volumteric scattering.</p>
-	<p><strong>Accomplishments</strong> We successfully implemented structures that displayed images with and without volumetric scattering. With volumtric scattering, we see the beam of light as it travels across the box. Without volumtric scattering, we only see the laser appear as a dot on the wall.</p>
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
 
-  </section>
+    const icons = {
+      light: '<i class="fas fa-moon"></i><span>Dark</span>',
+      dark: '<i class="fas fa-sun"></i><span>Light</span>'
+    };
 
-  <!-- Section 1 -->
-  <section class="section" id="task1">
-    <div class="section-label">
-      <span class="section-tag">§ 1</span>
-      <h2>Project: Volumetric Scattering</h2>
-    </div>
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      toggle.innerHTML = icons[theme === 'dark' ? 'dark' : 'light'];
+      localStorage.setItem('theme', theme);
+    }
 
-    <h3>Preliminary Results</h3>
+    // Respect saved preference, then system preference
+    const saved = localStorage.getItem('theme');
+    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    applyTheme(saved || system);
 
-    <p><strong>[Dummy]</strong> Describe your pipeline in plain language here: which files you edited, what each stage does, and how data flows from pixels to color. Swap this block for your real explanation.</p>
-
-    <p>Optional math block for testing MathJax:</p>
-    \[
-      E \approx \frac{1}{N}\sum_{i=1}^{N} f(x_i)
-    \]
-
-    <hr>
-
-    <h3>Progress</h3>
-
-    <p>Curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Use this space for the algorithm your assignment asks for (e.g. intersection, sampling rule).</p>
-
-    <pre><code>// placeholder code block
-void example() {
-  // replace with a short excerpt from your implementation
-}</code></pre>
-
-    <hr>
-
-	<h3>Accomplishments</h3>
-
-    <p>Curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Use this space for the algorithm your assignment asks for (e.g. intersection, sampling rule).</p>
-
-    <pre><code>// placeholder code block
-void example() {
-  // replace with a short excerpt from your implementation
-}</code></pre>
-
-    <hr>
-
-    <h3>Figures</h3>
-
-    <p>Below: swap image paths and captions for your actual renders. Alt text should describe what the reader should see.</p>
-
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0;">
-      <figure style="margin: 0;">
-        <img src="images/p1_CBempty.png" alt="Dummy figure 1">
-        <figcaption><code>CBempty.dae</code> — placeholder caption</figcaption>
-      </figure>
-      <figure style="margin: 0;">
-        <img src="images/p1_CBspheres.png" alt="Dummy figure 2">
-        <figcaption><code>CBspheres_lambertian.dae</code> — placeholder caption</figcaption>
-      </figure>
-      <figure style="margin: 0;">
-        <img src="images/p1_banana.png" alt="Dummy figure 3">
-        <figcaption><code>banana.dae</code> — placeholder caption</figcaption>
-      </figure>
-      <figure style="margin: 0;">
-        <img src="images/p1_cow.png" alt="Dummy figure 4">
-        <figcaption><code>cow.dae</code> — placeholder caption</figcaption>
-      </figure>
-    </div>
-  </section>
-  
-</main>
-
-<footer>
-  <a href="../index.html">← All Homeworks</a>
-  &nbsp;·&nbsp;
-  CS 184 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; UC Berkeley
-  <div style="margin-top: 10px; font-size: 0.74rem; color: #aaa;">
-    Page design adapted from <a href="https://nerfies.github.io" target="_blank" style="color: #aaa;">Nerfies</a>
-    (<a href="https://github.com/nerfies/nerfies.github.io" target="_blank" style="color: #aaa;">source</a>),
-    licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color: #aaa;">CC BY-SA 4.0</a>.
-    Additional aesthetic modifications applied.
-  </div>
-</footer>
-
-<script>
-  document.getElementById('email-copy').addEventListener('click', function() {
-    navigator.clipboard.writeText('idhant@berkeley.edu');
-    const el = this;
-    const orig = el.textContent;
-    el.textContent = 'copied!';
-    setTimeout(() => el.textContent = orig, 1800);
-  });
-</script>
-
-<script>
-  const toggle = document.getElementById('theme-toggle');
-  const root   = document.documentElement;
-
-  const icons = { light: '<i class="fas fa-moon"></i><span>Dark</span>',
-                  dark:  '<i class="fas fa-sun"></i><span>Light</span>' };
-
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    toggle.innerHTML = icons[theme === 'dark' ? 'dark' : 'light'];
-    localStorage.setItem('theme', theme);
-  }
-
-  // Respect saved preference, then system preference
-  const saved  = localStorage.getItem('theme');
-  const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  applyTheme(saved || system);
-
-  toggle.addEventListener('click', () => {
-    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
-</script>
+    toggle.addEventListener('click', () => {
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+  </script>
 </body>
+
 </html>
