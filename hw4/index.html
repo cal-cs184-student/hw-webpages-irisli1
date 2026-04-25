@@ -43,15 +43,12 @@
 			<figcaption>You can add images with captions!</figcaption>
 		</figure>
 
-		<!--
-		We've already added one heading per part, to make your write-up as navigable when grading. Please fit your write-up within these sections!
-		-->
-
 		<h2>Overview</h2>
 			Built a full cloth simulator from scratch. First made a grid of point masses hooked together by springs (structural, shearing, bending) to model how cloth actually holds together. Then got the physics working with Verlet integration to move everything each timestep, plus Hooke's law for the spring forces and a Provot constraint to stop springs from stretching too crazy.
 			After that added collision detection with spheres and planes so the cloth actually interacts with objects instead of clipping through everything. Then implemented self collision using spatial hashing so the cloth folds on itself realistically without being stupidly slow. Hashing into 3D buckets makes it O(n) instead of checking every pair.
 			Finally did the GLSL shaders including diffuse, Blinn Phong, texture mapping, bump and displacement mapping, and a mirror shader. The shaders part was actually really cool to see how much you can fake with just normal tricks instead of real geometry.
 			Honestly the most interesting thing was seeing how much a wrong sign or a typo can completely break everything with zero obvious error messages. Also spatial hashing was a cool trick, never thought about partitioning 3D space into boxes to speed up collision detection like that. The bump vs displacement comparison was also eye opening. Bump mapping looks almost as good as displacement at a fraction of the cost.
+
 		<h2>Part 1: Masses and springs</h2>
 			<div style="display: flex; flex-direction: column; align-items: center;">
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
@@ -64,7 +61,6 @@
 				  <img src="imgs/part%201%20constraints.png" width="400px"/>
 				  <figcaption>All Constraints</figcaption>
 				</td>
-
 			  </tr>
 			  <tr>
 				  <td style="text-align: center;">
@@ -75,7 +71,6 @@
 				  <img src="imgs/part%201%20shearing%20constraint.png" width="400px"/>
 				  <figcaption>Only Shearing Constraints</figcaption>
 				</td>
-
 			  </tr>
 			</table>
 		</div>
@@ -90,7 +85,8 @@
 
 			<br>
 			Damping:
-			Low damping (like 0%): cloth swings and oscillates forever, never really settles — keeps bouncing around like there's no air resistance. High damping (like 1%): cloth moves really slowly and sluggishly, settles almost immediately with no bouncing. Looks like it's moving through water.
+			Low damping (like 0%): cloth swings and oscillates forever, never really settles, keeps bouncing around like there is no air resistance. High damping (like 1%): cloth moves really slowly and sluggishly, settles almost immediately with no bouncing. Looks like it is moving through water.
+
 			<div style="display: flex; flex-direction: column; align-items: center;">
 				<table style="width: 100%; text-align: center; border-collapse: collapse;">
 					<tr>
@@ -117,9 +113,10 @@
 					</tr>
 				</table>
 			</div>
+
 		<h2>Part 3: Handling collisions with other objects</h2>
 		My implementation of handling collisions with spheres and planes are for spheres, check if the point mass is inside the sphere by seeing if its distance from the origin is less than the radius. If so, find the tangent point by extending the ray from the origin through the position out to the sphere surface, compute the correction vector from last_position to that tangent point, and set the new position to last_position + correction * (1 - friction).
-			For planes: check if the point mass crossed the plane by taking the dot product of both position and last_position with the plane normal, if the signs differ it crossed. Find the exact intersection point using parametric ray intersection, nudge it slightly above the plane by SURFACE_OFFSET on the correct side, then same deal — last_position + correction * (1 - friction).
+			For planes: check if the point mass crossed the plane by taking the dot product of both position and last_position with the plane normal, if the signs differ it crossed. Find the exact intersection point using parametric ray intersection, nudge it slightly above the plane by SURFACE_OFFSET on the correct side, then same deal, last_position + correction * (1 - friction).
 			<div style="display: flex; flex-direction: column; align-items: center;">
 				<table style="width: 100%; text-align: center; border-collapse: collapse;">
 					<tr>
@@ -146,12 +143,12 @@
 					</tr>
 				</table>
 			</div>
-			ks = 500: cloth is really drapey and conforms tightly to the sphere, lots of small wrinkles hanging down
-			ks = 5000: balanced, looks like normal fabric draped over a ball
-			ks = 50000: cloth is stiff and barely conforms to the sphere, hangs off it almost like a rigid sheet with very few folds
+			ks = 500: cloth is really drapey and conforms tightly to the sphere, lots of small wrinkles hanging down.
+			ks = 5000: balanced, looks like normal fabric draped over a ball.
+			ks = 50000: cloth is stiff and barely conforms to the sphere, hangs off it almost like a rigid sheet with very few folds.
 
 		<h2>Part 4: Handling self-collisions</h2>
-		My implementation for handling self-collisions was building a spatial hash map that divides 3D space into boxes of size w * h * t. Each frame, every point mass gets hashed to its box and thrown into a bucket. Then for each point mass, I look up its bucket, check every other mass in the same box, and if any two are within 2 * thickness apart I compute a correction vector to push them apart. Average all the corrections and divide by simulation_steps for stability. Way faster than checking every pair — O(n) instead of O(n^2).
+		My implementation for handling self collisions was building a spatial hash map that divides 3D space into boxes of size w * h * t. Each frame, every point mass gets hashed to its box and thrown into a bucket. Then for each point mass, I look up its bucket, check every other mass in the same box, and if any two are within 2 * thickness apart I compute a correction vector to push them apart. Average all the corrections and divide by simulation_steps for stability. Way faster than checking every pair, O(n) instead of O(n^2).
 
 			<div style="display: flex; flex-direction: column; align-items: center;">
 				<table style="width: 100%; text-align: center; border-collapse: collapse;">
@@ -180,13 +177,12 @@
 				</table>
 			</div>
 			<p>Low density (density = 1): cloth is super light so it floats down slowly and folds really gently, almost like tissue paper. High density (density = 150): cloth is heavy, falls fast, and kind of slams into itself with bigger more chaotic folds.
-				Low ks (ks = 500): springs are weak so the cloth is really floppy and drapes in lots of small wrinkles. High ks (ks = 50000): springs are stiff so the cloth resists folding and you get fewer but bigger, stiffer folds — almost like a tarp instead of fabric.</p>
-
+				Low ks (ks = 500): springs are weak so the cloth is really floppy and drapes in lots of small wrinkles. High ks (ks = 50000): springs are stiff so the cloth resists folding and you get fewer but bigger, stiffer folds, almost like a tarp instead of fabric.</p>
 
 		<h2>Part 5: Shaders</h2>
-		A shader program is a program that runs on the GPU for every vertex. The vertex shader transforms geometry into screen space and moves it along. The fragment shader takes the information and calculates the final pixel color. Vertex and fragment shaders work together to create lighting and material effects by vertex shaders takes care of the geometry while the fragement shaders takes care of the lighting and color.
+		A shader program is a program that runs on the GPU for every vertex. The vertex shader transforms geometry into screen space and moves it along. The fragment shader takes the information and calculates the final pixel color. Vertex and fragment shaders work together to create lighting and material effects by vertex shaders taking care of the geometry while the fragment shaders take care of the lighting and color.
 		<br>
-		The Blinn-Phong shading model is when ambient, diffuse, and specular are brought together to show a flat dark base, then how much light hits the surface, and then the highlight that comes based on the vector between light and camera. Here are screenshots of the different components:
+		The Blinn Phong shading model is when ambient, diffuse, and specular are brought together to show a flat dark base, then how much light hits the surface, and then the highlight that comes based on the vector between light and camera. Here are screenshots of the different components:
 			<div style="display: flex; flex-direction: column; align-items: center;">
 				<table style="width: 100%; text-align: center; border-collapse: collapse;">
 					<tr>
@@ -208,7 +204,7 @@
 					<tr>
 						<td style="text-align: center;">
 							<img src="imgs/phong%20part5.png" width="400px"/>
-							<figcaption>Entire Blinn-Phong Model</figcaption>
+							<figcaption>Entire Blinn Phong Model</figcaption>
 						</td>
 					</tr>
 				</table>
@@ -221,7 +217,6 @@
 							<figcaption>Texture Mapping Shader with Own Custom Texture</figcaption>
 						</td>
 					</tr>
-
 				</table>
 			</div>
 			<div style="display: flex; flex-direction: column; align-items: center;">
@@ -235,16 +230,13 @@
 							<img src="imgs/part5clothbump.png" width="400px"/>
 							<figcaption>Bump Mapping on Cloth</figcaption>
 						</td>
-
 					</tr>
-
 				</table>
 			</div>
-			<p>Bump mapping and displacement mapping both use the same height map texture but work pretty differently. Bump only fakes the detail by messing with the normals — so the silhouette of the sphere still looks perfectly smooth even though the surface looks bumpy. Displacement actually moves the vertices, so you get real geometric bumps that show up on the edges too.
+			<p>Bump mapping and displacement mapping both use the same height map texture but work pretty differently. Bump only fakes the detail by messing with the normals so the silhouette of the sphere still looks perfectly smooth even though the surface looks bumpy. Displacement actually moves the vertices, so you get real geometric bumps that show up on the edges too.
 
-				The coarseness difference is really obvious. At -o 16 -a 16 displacement looks terrible and blocky because there aren't enough vertices to represent the detail in the height map. Bump still looks fine at low coarseness since it's all computed per-pixel anyway. At -o 128 -a 128 displacement looks much better and way closer to the bump mapped result since there's enough geometry to capture the fine detail.
+			The coarseness difference is really obvious. At -o 16 -a 16 displacement looks terrible and blocky because there are not enough vertices to represent the detail in the height map. Bump still looks fine at low coarseness since it is all computed per pixel anyway. At -o 128 -a 128 displacement looks much better and way closer to the bump mapped result since there is enough geometry to capture the fine detail.</p>
 
-			</p>
 			<div style="display: flex; flex-direction: column; align-items: center;">
 				<table style="width: 100%; text-align: center; border-collapse: collapse;">
 					<tr>
@@ -256,25 +248,13 @@
 							<img src="imgs/part5mirrorcloth.png" width="400px"/>
 							<figcaption>Mirror Shader on Cloth</figcaption>
 						</td>
-
 					</tr>
-
 				</table>
 			</div>
 
 		<h2>(Optional) Part 6: Extra Credit - Additional cloth simulation features!</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
+
 		</div>
 	</body>
 </html>
