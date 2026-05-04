@@ -717,12 +717,13 @@
         <br><br>
 
         After getting this isotropic approach working, we moved to adjusting the <code>g</code> parameter in the
-        hard-coded fog. This moved the light from pure isotropic scattering to <i>forward</i> scattering, which is much
+        non-uniform fog. This moved the light from pure isotropic scattering to <i>forward</i> scattering, which is much
         more like how light scatters through fog in reality. Instead of shooting off in any random direction, it picks a
         random direction within a certain range of angles that in a similar direction to the original ray.
 
         This created a lot of noise, as in order to see the effect of this, the maximum ray depth needed to be increased
-        significantly.
+        significantly. We added Russian roulette and importance sampling to reduce noise. We were able to use 2048 sampling to 
+        generate a result that has the minimal amount of noise. 
 
       </ul>
     </section>
@@ -734,11 +735,24 @@
         <h2>Results</h2>
       </div>
 
-
       <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0;">
         <figure style="margin: 0;">
           <img src="docs/checkpoint/fog_test8_samples_up.png" alt="Cornell box with fog">
-          <figcaption>Isotropic volumetric scattering.</figcaption>
+          <figcaption>Forward volumetric scattering before noise reduction.</figcaption>
+        </figure>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0;">
+        <figure style="margin: 0;">
+          <img src="docs/after_noise.png" alt="Cornell box with fog">
+          <figcaption>Forward scattering after noise reduction.</figcaption>
+        </figure>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0;">
+        <figure style="margin: 0;">
+          <img src="docs/nonuniform_beforenoise.png" alt="Cornell box with fog">
+          <figcaption>Forward scattering with non-uniform fog before noise reduction.</figcaption>
         </figure>
       </div>
 
